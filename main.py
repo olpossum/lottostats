@@ -65,15 +65,18 @@ def aggregate_frequency(df, cols):
 
     agg_freq = vc1.add(vc2.add(vc3.add(vc4.add(vc5))))
 
+    #plot_frequency(agg_freq.drop(np.arange(32,71,1)))
+
     return(agg_freq, vc6)
 
-def plot_frequency(freq):
+def plot_frequency(freq,type):
     fig,ax = plt.subplots()
     ax = freq.plot.bar(x='num', y='freq')
+    plt.title(type)
     plt.show()
 
 def top_frequency(freq):
-    freq = freq.drop(np.arange(1,32,1))
+    #freq = freq.drop(np.arange(1,32,1))
     freq = freq.sort_values(ascending=False)
     print(freq)
     return freq
@@ -137,7 +140,7 @@ def dict_2_csv(dicts):
 
 
 if __name__ == '__main__':
-    entries = 10
+    entries = int(input("Enter number of entries to generate: "))
     df = import_data(datapath)
     cols = ['B1','B2','B3','B4','B5']
     df[cols] = df['Winning Numbers'].str.split(' ', expand=True).astype(int)
@@ -150,8 +153,8 @@ if __name__ == '__main__':
 
     frequency_num = top_frequency(frequency_num)
 
-    #plot_frequency(frequency_num)
-    #plot_frequency(frequency_mega)
+    plot_frequency(frequency_num, 'Number Frequency')
+    plot_frequency(frequency_mega, 'Megaball Frequency')
 
     tickets = pick_tickets(entries, frequency_num, frequency_mega)
     print(tickets)
