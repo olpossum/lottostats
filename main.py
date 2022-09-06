@@ -8,7 +8,7 @@ import numpy as np
 import os
 from collections import Counter
 
-datapath = os.path.normpath("/home/andy/PycharmProjects/lottostats/archive/Lottery_Mega_Millions_Winning_Numbers__Beginning_2002.csv")
+datapath = os.path.normpath("archive/Lottery_Mega_Millions_Winning_Numbers__Beginning_2002.csv")
 
 def import_data(datapath):
     data = pd.read_csv(datapath, parse_dates=['Draw Date'])
@@ -78,22 +78,22 @@ def plot_frequency(freq,type):
 def top_frequency(freq):
     #freq = freq.drop(np.arange(1,32,1))
     freq = freq.sort_values(ascending=False)
-    print(freq)
+    #print(freq)
     return freq
 
 def pick_tickets(entries, fnum, fmega):
     tickets = []
     entry_i = 1
     fnum_i = 0
-    print(fnum.index[fnum_i])
-    print(fnum.index[fnum_i+1])
-    print(fnum.index[fnum_i+2])
-    print(fnum.index[fnum_i+3])
-    print(fnum.index[fnum_i+4])
+    #print(fnum.index[fnum_i])
+    #print(fnum.index[fnum_i+1])
+    #print(fnum.index[fnum_i+2])
+    #print(fnum.index[fnum_i+3])
+    #print(fnum.index[fnum_i+4])
     fmnum_i = 0
     while entry_i <= entries:
         try:
-            print("Loop " + str(entry_i))
+            #print("Loop " + str(entry_i))
             entry_dict = {}
             entry_dict.update({"B1": fnum.index[fnum_i]})
             entry_dict.update({"B2": fnum.index[fnum_i+1]})
@@ -131,7 +131,7 @@ def pick_tickets(entries, fnum, fmega):
 
 def dict_2_csv(dicts):
     keys = dicts[0].keys()
-    print(keys)
+    #print(keys)
     with open('test.csv', 'w') as output_file:
         dict_writer = csv.DictWriter(output_file,keys)
         dict_writer.writeheader()
@@ -144,7 +144,7 @@ if __name__ == '__main__':
     df = import_data(datapath)
     cols = ['B1','B2','B3','B4','B5']
     df[cols] = df['Winning Numbers'].str.split(' ', expand=True).astype(int)
-    print(df.head())
+    #print(df.head())
     valid = 0
     while valid == 0:
         valid, df = data_check(df)
