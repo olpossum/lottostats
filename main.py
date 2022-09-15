@@ -1,7 +1,7 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import csv
-
+import datetime as dt
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -9,6 +9,7 @@ import os
 from collections import Counter
 
 datapath = os.path.normpath("archive/Lottery_Mega_Millions_Winning_Numbers__Beginning_2002.csv")
+#plotpath = os.path.normpath("./plots/")
 
 def import_data(datapath):
     data = pd.read_csv(datapath, parse_dates=['Draw Date'])
@@ -73,7 +74,9 @@ def plot_frequency(freq,type):
     fig,ax = plt.subplots()
     ax = freq.plot.bar(x='num', y='freq')
     plt.title(type)
-    plt.show()
+    #plt.show()
+    plt.savefig(str(type) + dt.datetime.now().strftime("%Y%m%d") + ".png")
+
 
 def top_frequency(freq):
     #freq = freq.drop(np.arange(1,32,1))
