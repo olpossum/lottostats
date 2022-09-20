@@ -71,6 +71,7 @@ def aggregate_frequency(df, cols):
     return(agg_freq, vc6)
 
 def plot_frequency(freq,type):
+    #print(freq.idx.count())
     fig,ax = plt.subplots()
     ax = freq.plot.bar(x='num', y='freq')
     plt.title(type)
